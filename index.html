@@ -218,10 +218,22 @@
         document.getElementById('goalBtn')
             .addEventListener('click', addGoal);
 
+        
+        function createRemoveBtn(onClick) {
+            const removeBtn = document.createElement('button');
+            removeBtn.innerHTML = 'x';
+
+            removeBtn.addEventListener('click', onClick);
+
+            return removeBtn;
+        }
         function addTodoToDom(todo) {
             const nodeLi = document.createElement('li');
             const textLi = document.createTextNode(todo.name);
             nodeLi.appendChild(textLi);
+            nodeLi.appendChild(createRemoveBtn(() => {
+                store.dispatch(removeTodoAction(todo.id));
+            }));
             nodeLi.style.textDecoration = todo.complete ? 'line-through' : 'none';
             nodeLi.addEventListener('click', () => {
                 store.dispatch(toggleTodoAction(todo.id));
@@ -234,6 +246,9 @@
             const nodeLi = document.createElement('li');
             const textLi = document.createTextNode(goal.name);
             nodeLi.appendChild(textLi);
+            nodeLi.appendChild(createRemoveBtn(() => {
+                store.dispatch(removeGoalAction(goal.id));
+            }));
 
             document.getElementById('goals')
                 .appendChild(nodeLi);
