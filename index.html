@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Udacity Todos Goals</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.7.2/redux.min.js"></script>
  </head>
 <body>
     <div>
@@ -17,40 +18,8 @@
         <button id="goalBtn">Add Goal</button>
         <ul id="goals"></ul>
     </div>
+
     <script type="text/javascript">
-        // Library Code
-        function createStore (reducer) {
-            // The store should have four parts
-            // 1. The state
-            // 2. Get the state.
-            // 3. Listen to changes on the state.
-            // 4. Update the state
-
-            let state;
-            let listeners = [];
-
-            const getState = () => state;
-
-            const subscribe = (listener) => {
-                listeners.push(listener);
-                return () => {
-                    listeners = listeners.filter( l => l !== listener)
-                }
-            };
-
-            const dispatch = (action) => {
-                state = reducer(state, action);
-                listeners.forEach(listener => listener());
-            };
-
-            return {
-                getState,
-                subscribe,
-                dispatch
-            }
-        }
-
-
         //App Code
 
         const ADD_TODO = 'ADD_TODO';
@@ -71,12 +40,14 @@
                 todo
             }
         }
+
         function removeTodoAction(id) {
             return {
                 type: REMOVE_TODO,
                 id
             }
         }
+
         function toggleTodoAction(id) {
             return {
                 type: TOGGLE_TODO,
@@ -84,13 +55,13 @@
             }
         }
 
-
         function addGoalAction(goal) {
             return {
                 type : ADD_GOAL,
                 goal
             }
         }
+
         function removeGoalAction(id) {
             return {
                 type: REMOVE_GOAL,
@@ -132,7 +103,7 @@
         /*
         Passing the root reducer to our store since our createStore function can only take one reducer.
         */
-        const store = createStore(app);
+        const store = Redux.createStore(app);
 
         let updateUI = () => {
             const {todos, goals} = store.getState();
