@@ -93,17 +93,10 @@
             }
         }
 
-        function app( state = {}, action) {
-            return {
-                todos: todo(state.todos, action),
-                goals: goal(state.goals, action)
-            }
-        }
-
-        /*
-        Passing the root reducer to our store since our createStore function can only take one reducer.
-        */
-        const store = Redux.createStore(app);
+        const store = Redux.createStore(Redux.combineReducers({
+            todos: todo,
+            goals: goal
+        }));
 
         let updateUI = () => {
             const {todos, goals} = store.getState();
