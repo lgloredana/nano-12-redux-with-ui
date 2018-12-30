@@ -58,22 +58,26 @@
         const TOGGLE_TODO = 'TOGGLE_TODO';
         const ADD_GOAL = 'ADD_GOAL';
         const REMOVE_GOAL = 'REMOVE_GOAL';
+        
+        function generateId() {
+            return Math.random().toString(36).substring(2) + (new Date()).getTime().toString(36);
+        }
 
         //action creators
 
-        function addTodo(todo) {
+        function addTodoAction(todo) {
             return {
                 type : ADD_TODO,
                 todo
             }
         }
-        function removeTodo(id) {
+        function removeTodoAction(id) {
             return {
                 type: REMOVE_TODO,
                 id
             }
         }
-        function toggleTodo(id) {
+        function toggleTodoAction(id) {
             return {
                 type: TOGGLE_TODO,
                 id
@@ -81,13 +85,13 @@
         }
 
 
-        function addGoal(goal) {
+        function addGoalAction(goal) {
             return {
                 type : ADD_GOAL,
                 goal
             }
         }
-        function removeGoal(id) {
+        function removeGoalAction(id) {
             return {
                 type: REMOVE_GOAL,
                 id
@@ -141,45 +145,74 @@
         const unsubscribe = store.subscribe(showChange);
         unsubscribe();
 
-        console.log('--- add TODO');
-        store.dispatch(addTodo({
-            id : 1,
-            name: "Was the car",
-            complete: false
-        }));
-        console.log('--- add TODO');
-        store.dispatch(addTodo({
-            id : 2,
-            name: "Go out with Radu",
-            complete: false
-        }));
-        console.log('--- add TODO');
-        store.dispatch(addTodo({
-            id : 3,
-            name: "Go to shopping",
-            complete: false
-        }));
+        // console.log('--- add TODO');
+        // store.dispatch(addTodo({
+        //     id : 1,
+        //     name: "Was the car",
+        //     complete: false
+        // }));
+        // console.log('--- add TODO');
+        // store.dispatch(addTodo({
+        //     id : 2,
+        //     name: "Go out with Radu",
+        //     complete: false
+        // }));
+        // console.log('--- add TODO');
+        // store.dispatch(addTodo({
+        //     id : 3,
+        //     name: "Go to shopping",
+        //     complete: false
+        // }));
+        //
+        // console.log('--- remove TODO');
+        // store.dispatch(removeTodo(2));
+        //
+        // console.log('--- toggle TODO');
+        // store.dispatch(toggleTodo(3));
+        //
+        // console.log('--- add GOAL');
+        // store.dispatch(addGoal({
+        //     id : 1,
+        //     name : 'Learn Redux'
+        // }));
+        //
+        // console.log('--- add GOAL');
+        // store.dispatch(addGoal({
+        //     id : 2,
+        //     name : 'Learn JavaScript'
+        // }));
+        //
+        // console.log('--- remove GOAL');
+        // store.dispatch(removeGoal(2));
+        
+        function addTodo() {
+            const input = document.getElementById('todo');
+            const name = input.value;
+            input.value = '';
 
-        console.log('--- remove TODO');
-        store.dispatch(removeTodo(2));
+            store.dispatch(addTodoAction({
+                id: generateId(),
+                name,
+                complete: false
+            }))
+        }
+        
+        function addGoal() {
+            const input = document.getElementById('goal');
+            const name = input.value;
+            input.value = '';
 
-        console.log('--- toggle TODO');
-        store.dispatch(toggleTodo(3));
+            store.dispatch(addGoalAction({
+                id: generateId(),
+                name
+            }))
+        }
 
-        console.log('--- add GOAL');
-        store.dispatch(addGoal({
-            id : 1,
-            name : 'Learn Redux'
-        }));
+        document.getElementById('todoBtn')
+            .addEventListener('click', addTodo);
 
-        console.log('--- add GOAL');
-        store.dispatch(addGoal({
-            id : 2,
-            name : 'Learn JavaScript'
-        }));
-
-        console.log('--- remove GOAL');
-        store.dispatch(removeGoal(2));
+        document.getElementById('goalBtn')
+            .addEventListener('click', addGoal);
     </script>
 
 </body>
