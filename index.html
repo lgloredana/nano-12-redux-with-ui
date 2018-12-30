@@ -222,6 +222,10 @@
             const nodeLi = document.createElement('li');
             const textLi = document.createTextNode(todo.name);
             nodeLi.appendChild(textLi);
+            nodeLi.style.textDecoration = todo.complete ? 'line-through' : 'none';
+            nodeLi.addEventListener('click', () => {
+                store.dispatch(toggleTodoAction(todo.id));
+            });
             document.getElementById('todos')
                 .appendChild(nodeLi);
         }
