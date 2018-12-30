@@ -9,13 +9,13 @@
         <h1>Todo List</h1>
         <input id="todo" type="text" placeholder="Add Todo" />
         <button id="todoBtn">Add Todo</button>
-        <ul id="todos>"></ul>
+        <ul id="todos"></ul>
     </div>
     <div>
         <h1>Goals</h1>
         <input id="goal" type="text" placeholder="Add Goal" />
         <button id="goalBtn">Add Goal</button>
-        <ul id="goals>"></ul>
+        <ul id="goals"></ul>
     </div>
     <script type="text/javascript">
         // Library Code
@@ -134,16 +134,13 @@
         */
         const store = createStore(app);
 
-        let showState = () => {
-            console.log("******Listen for changes : ", store.getState());
-        };
-        let showChange = () => {
-            console.log("-----The store changed");
-        };
-        store.subscribe(showState);
+        let updateUI = () => {
+            const {todos, goals} = store.getState();
 
-        const unsubscribe = store.subscribe(showChange);
-        unsubscribe();
+            todos.forEach(addTodoToDom);
+            goals.forEach(addGoalToDom);
+        };
+        store.subscribe(updateUI);
 
         // console.log('--- add TODO');
         // store.dispatch(addTodo({
@@ -184,17 +181,21 @@
         //
         // console.log('--- remove GOAL');
         // store.dispatch(removeGoal(2));
+
+        //DOM code
         
         function addTodo() {
             const input = document.getElementById('todo');
             const name = input.value;
             input.value = '';
 
-            store.dispatch(addTodoAction({
+            const newTodo = {
                 id: generateId(),
                 name,
                 complete: false
-            }))
+            };
+
+            store.dispatch(addTodoAction(newTodo));
         }
         
         function addGoal() {
@@ -213,6 +214,23 @@
 
         document.getElementById('goalBtn')
             .addEventListener('click', addGoal);
+
+        function addTodoToDom(todo) {
+            const nodeLi = document.createElement('li');
+            const textLi = document.createTextNode(todo.name);
+            nodeLi.appendChild(textLi);
+            document.getElementById('todos')
+                .appendChild(nodeLi);
+        }
+        
+        function addGoalToDom(goal) {
+            const nodeLi = document.createElement('li');
+            const textLi = document.createTextNode(goal.name);
+            nodeLi.appendChild(textLi);
+
+            document.getElementById('goals')
+                .appendChild(nodeLi);
+        }
     </script>
 
 </body>
