@@ -6,7 +6,7 @@ Implemented functionality:
  - add todo
  - remove todo
  - toggle todo
- 
+ - /
  - add goals
  - remove goal
  
