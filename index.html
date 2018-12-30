@@ -137,6 +137,9 @@
         let updateUI = () => {
             const {todos, goals} = store.getState();
 
+            document.getElementById('todos').innerHTML = '';
+            document.getElementById('goals').innerHTML = '';
+
             todos.forEach(addTodoToDom);
             goals.forEach(addGoalToDom);
         };
