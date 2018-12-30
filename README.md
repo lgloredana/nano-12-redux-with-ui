@@ -16,4 +16,4 @@ Implemented functionality:
  - Open index.html in browser.
  
 
- ![ScreenShot](/img/todos-goals-ui.png)
+ ![ScreenShot](img/todos-goals-ui.png)
