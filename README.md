@@ -1,15 +1,19 @@
 # The purpose of this project
 This is a project which allows to see how the redux library works.
-The main point targeted here are:
-* storing the state
-* getting the state
-* listening to changes of the state
-* updating the state
+Shows how the standard DOM can be manipulate using custom redux lib.
+
+Implemented functionality:
+ - add todo
+ - remove todo
+ - toggle todo
+ 
+ - add goals
+ - remove goal
+ 
+ This project is using 2 states todos and goals in order to show how we can work with multiple reducers.
 
 # Runing the application
  - Open index.html in browser.
- - Open debugger tools  - console
- - In the console appears all the state changes
  
- 
- ![ScreenShot](img/console-screen.png)
+
+ ![ScreenShot](img/todos-goals-ui.png)
